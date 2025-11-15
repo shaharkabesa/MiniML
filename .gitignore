@@ -1,0 +1,13 @@
+# Ignore specific files
+
+
+# Ignore entire folders (end with a slash)
+node_modules/
+__pycache__/
+logs/
+models/
+
+# Ignore all files with a specific extension
+*.log
+*.tmp
+*.exe
