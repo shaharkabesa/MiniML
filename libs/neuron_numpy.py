@@ -58,7 +58,7 @@ class neuronNumpy:
             self.determineColor(final_answer)
         else :
             print("Research failed")
-    
+    # models\color_recognizer_1.npy
     #function to load data by the name of the model you give it at the start
     def loadData(self):
         self.matrix_weight =  np.load(f"./models/{self.model_name}.npy")

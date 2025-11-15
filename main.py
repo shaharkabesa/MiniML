@@ -1,7 +1,7 @@
 import numpy as np
 
 
-from neuron_numpy import neuronNumpy
+from libs.neuron_numpy import neuronNumpy
 r = 255/255
 g = 0/255
 b = 0/255
