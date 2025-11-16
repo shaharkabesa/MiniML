@@ -9,7 +9,8 @@ class neuronNumpy:
         self.matrix_target = matrix_target
         self.learning_rate = learning_rate
         self.model_name = model_name
-
+        self.matrix_weight2 = matrix_weight
+        
     class colorEnum(enum.Enum):
         red = 0
         green = 1
@@ -19,18 +20,19 @@ class neuronNumpy:
     #Seperated function to calculate the prediction
     def calculatePrediction(self):
         # predicition is our matrix input multiplied by weights 
-        prediction = self.matrix_value @ self.matrix_weight
-        print(f"Current prediction {prediction}\n")
+        prediction = self.matrix_value @ self.matrix_weight # Calculating our Z1          
+        print(f"Current prediction {prediction}\n ")
         return prediction
     # Seperated error function to seperate function measuring how off are we from target 
     def calculateError(self, prediction):
         # we used the prediction we minus it by our target to see the margin of error and fix the direction 
         error = prediction - self.matrix_target
+
         print(f"Error margin: {error}\n")
         return error
     # Here we do the recalculation of weight after collecting information each cycle    
     def calculateWeight(self, error):
-        grediant = self.matrix_value.T @ error 
+        grediant = self.matrix_value.T @ error
         self.matrix_weight = self.matrix_weight - (grediant * self.learning_rate)
         print(f"New weight: {self.matrix_weight}")
     # This is the starting function to start research 
@@ -44,7 +46,7 @@ class neuronNumpy:
             error = self.calculateError(prediction)
             #final step is recalculating our weight matrix
             self.calculateWeight(error)
-        
+            
         #display if research was successful
         self.results(self.matrix_weight)
         #save data of model
@@ -74,3 +76,7 @@ class neuronNumpy:
         color = self.colorEnum(winning_index).name
 
         print(f"The color is {color}")
+
+
+    def relu(self,x):
+        return np.maximum(0, x) 
