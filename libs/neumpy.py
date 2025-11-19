@@ -71,3 +71,6 @@ class neumpy:
 
     def relu(x):
         return np.maximum(0,x)
+    def relu_dervative(z):
+
+        return (z>0) * 1
