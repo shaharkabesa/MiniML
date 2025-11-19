@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+* {
+      font-family: "Roboto", sans-serif;
+}
+
+body {
+    direction:ltr;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ml_container {
+    width: 80%;
+    background-color: white;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    border-radius: 20px;
+}
+.operations {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+#color_box {
+    width: 50%;
+    height: 45%;
+    margin: 20px;
+    background-color: black;
+
+
+}
+.results {
+width: 100%;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+}
+.color_pick {
+    display: flex;
+    flex-direction: column;
+}
+
+.color_pick input {
+    margin: 10px;
+    border: none;
+    border-bottom: solid 1px black;
+}
+
+#color_stats_r::placeholder {
+    color:red;
+    font-weight: bolder;
+}
+
+#color_stats_g::placeholder {
+    color:green;
+    font-weight: bolder;
+}
+
+#color_stats_b::placeholder {
+    color:blue;
+    font-weight: bolder;
+}
+
+.buttons {
+    background-color: black;
+    color: white;
+    padding: 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 10px;
+    transition: all 0.5s;
+    font-weight: bold;
+}
+
+input {
+    padding: 2px;
+}
+
+input:focus {
+    outline: none;
+
+}
+
+.buttons:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    cursor: pointer;
+}
