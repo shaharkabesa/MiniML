@@ -9,7 +9,7 @@
     <h1>Placeholder</h1>
     <div class="ml_container">
         <div class="operations">
-            <form target="#" class="color_pick">
+            <form target="#" id="color_pick" >
             
             
                 <label for="color_stats">Write colors from 0 to 255</label>
@@ -17,7 +17,9 @@
                 <input id="color_stats_g" placeholder="green amount" class="color_definer" type="text" name="" >
                 <input id="color_stats_b" placeholder="blue amount" class="color_definer" type="text" name="" >
                 <button class="buttons" id="startResearch">Start Research</button>
-                <button class="buttons" id="identify">Identify color</button>
+                <button class="buttons" id="identify">Identify color</button>  
+                <button class="buttons" id="debug_button">Debug</button>
+
             </form>
             
 
@@ -32,5 +34,8 @@
             </div>
         </div>
     </div>
+
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"> </script> 
 </body>
 </html>

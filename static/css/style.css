@@ -47,12 +47,12 @@ align-items: center;
 justify-content: center;
 flex-direction: column;
 }
-.color_pick {
+#color_pick {
     display: flex;
     flex-direction: column;
 }
 
-.color_pick input {
+#color_pick input {
     margin: 10px;
     border: none;
     border-bottom: solid 1px black;
