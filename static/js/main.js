@@ -17,7 +17,7 @@ form.addEventListener("submit", (e) => {
 })
 
 
-function grabGreenColor() {
+function grabGenColor() {
     let green_input = document.getElementById("color_stats_g");
 
     green_input.addEventListener("input", (e) => {
