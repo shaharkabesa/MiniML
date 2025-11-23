@@ -1,50 +1,29 @@
 
+
 let r = 0;
+let g = 0;
+let b = 0;    
 
-function grabColors() {
+let color_name = document.getElementById("color_name");
 
-    
-    let red_input = document.getElementById("color_stats_r");
-    let green_input = document.getElementById("color_stats_g");
-    let blue_input = document.getElementById("color_stats_b");
+let color_box = document.getElementById("color_box");
 
-    
-    let color_picker_form = document.getElementById("color_pick");
-    
-    let g = 0;
-    let b = 0;
 
-    
-    if (color_picker_form != null) {
-        console.log("Loaded form");
-        color_picker_form = document.getElementById("color_pick").addEventListener('submit', (e) => {
-        e.preventDefault()
-        console.log(red_input.value);
-    }) 
-    };
+let form = document.getElementById("color_pick");
 
-    
-    if (red_input) {
-        console.log(red_input);
-    }
-  
-}
-console.log("Script loaded");
-function grabRedColor() {
-    let red_input = document.getElementById("color_stats_r");
 
-    red_input.addEventListener("change", (e) => {
-        r = e.target.value;
-        console.log("red amount: " + r); 
-    })
-};
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+})
+
 
 function grabGreenColor() {
-    let red_input = document.getElementById("color_stats_g");
+    let green_input = document.getElementById("color_stats_g");
 
-    red_input.addEventListener("change", (e) => {
-        r = e.target.value;
-        console.log("red amount: " + r); 
+    green_input.addEventListener("input", (e) => {
+        g = e.target.value;
+        console.log("red amount: " + g);
+        changeColorBox(r,g,b); 
     })
 };
 
@@ -52,26 +31,35 @@ function grabGreenColor() {
 function grabRedColor() {
     let red_input = document.getElementById("color_stats_r");
 
-    red_input.addEventListener("change", (e) => {
+    red_input.addEventListener("input", (e) => {
         r = e.target.value;
-        console.log("red amount: " + r); 
+        console.log("red amount: " + r);
+        changeColorBox(r,g,b); 
     })
 };
 
 
 function grabBlueColor() {
-    let red_input = document.getElementById("color_stats_b");
+    let blue_input = document.getElementById("color_stats_b");
 
-    red_input.addEventListener("change", (e) => {
+    blue_input.addEventListener("input", (e) => {
         b = e.target.value;
-        console.log("red amount: " + r); 
+        console.log("blue amount: " + b); 
+        changeColorBox(r,g,b);
     })
 };
+
+function changeColorBox(r,g,b) {
+
+    if (color_box) {
+        color_box.style.backgroundColor = (`rgb(${r},${g},${b})`);
+    }
+}
+
 
 
 
 grabGreenColor();
-grabRedColor()
+grabRedColor();
 grabBlueColor();
-grabColors();
 
