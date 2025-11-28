@@ -2,6 +2,11 @@
     let r = 0;
     let g = 0;
     let b = 0;
+            
+        let green_input = document.getElementById("color_stats_g");
+        let red_input = document.getElementById("color_stats_r");
+        let blue_input = document.getElementById("color_stats_b");
+
 
     let color_pick = document.getElementById("color_pick");
 
@@ -10,11 +15,8 @@
     })
     
   function previewColors() {
-        
-        let green_input = document.getElementById("color_stats_g");
-        let red_input = document.getElementById("color_stats_r");
-        let blue_input = document.getElementById("color_stats_b");
-        
+
+
         green_input.addEventListener("input", (e) => {
             g = e.target.value;
             console.log("red amount: " + g);
@@ -63,14 +65,26 @@ function handleResearchButton() {
     color_name = color_name.value;
     if(color_name) {
         let researchbtn = document.getElementById("startResearch");
-    researchbtn.addEventListener("click", (e) => {
+        researchbtn.addEventListener("click", (e) => {
         
         
      
         createColorObject(r,g,b, color_name);
+            
+
     });
     }
     
 }
-handleResearchButton();
+
+function clearData(){
+        green_input.value = "";
+        red_input.value = "";
+        blue_input.value = "";
+        color_name.value = "";
+        
+} 
+
+clearData();
 previewColors();
+handleResearchButton();
