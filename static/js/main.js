@@ -20,19 +20,27 @@
         green_input.addEventListener("input", (e) => {
             g = e.target.value;
             console.log("red amount: " + g);
-            changeColorBox(r,g,b); 
+            changeColorBox(r,g,b);
+            createColorObject(r,g,b, color_name);
         })
         
         red_input.addEventListener("input", (e) => {
             r = e.target.value;
             console.log("red amount: " + g);
-            changeColorBox(r,g,b); 
+            changeColorBox(r,g,b);
+            createColorObject(r,g,b, color_name); 
         })
         
         blue_input.addEventListener("input", (e) => {
             b = e.target.value;
             console.log("red amount: " + g);
-            changeColorBox(r,g,b); 
+            changeColorBox(r,g,b);
+            createColorObject(r,g,b, color_name); 
+        })
+        color_name.addEventListener("input", (e) => {
+            
+            createColorObject(r,g,b, color_name.value);
+
         })
 
         
@@ -60,31 +68,14 @@
     }
 
 
-function handleResearchButton() {
-
-    color_name = color_name.value;
-    if(color_name) {
-        let researchbtn = document.getElementById("startResearch");
-        researchbtn.addEventListener("click", (e) => {
-        
-        
-     
-        createColorObject(r,g,b, color_name);
-            
-
-    });
-    }
-    
-}
 
 function clearData(){
         green_input.value = "";
         red_input.value = "";
         blue_input.value = "";
         color_name.value = "";
-        
+        localStorage.clear();        
 } 
 
 clearData();
 previewColors();
-handleResearchButton();
