@@ -11,3 +11,9 @@ models/
 *.log
 *.tmp
 *.exe
+vecordb/chroma.sqlite3
+vecordb/5be3fefb-9cf8-4845-8f2f-97fc6c819d6e/data_level0.bin
+vecordb/5be3fefb-9cf8-4845-8f2f-97fc6c819d6e/header.bin
+.gitignore
+vecordb/5be3fefb-9cf8-4845-8f2f-97fc6c819d6e/link_lists.bin
+vecordb/5be3fefb-9cf8-4845-8f2f-97fc6c819d6e/length.bin

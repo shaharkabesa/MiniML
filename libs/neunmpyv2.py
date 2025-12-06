@@ -1,7 +1,10 @@
 import numpy as np
+import chromadb
+
+
 
 class neumpyv2:
-    def __init__(self, target, input, learning_rate):
+    def __init__(self, target, input, learning_rate, name):
         self.weight_matrix = []
         self.target = target
         self.input = input
@@ -14,12 +17,15 @@ class neumpyv2:
         self.hidden_error = []
         self.traning_complete = False
         self.cycles = 0
-
+        self.name = name
+        self.objectname = ""
+        self.vectordb = chromadb.PersistentClient("./vecordb")
+        self.collection = self.vectordb.get_or_create_collection(name="testcollection")
     def predictionStage(self):
         self.grad.clear()
         self.hidden_error.clear()
         self.input_memory.clear()
-
+        
         self.input_memory.append(self.input)
         for i in range(len(self.weight_matrix)):
             self.predict(self.input_memory[i],self.weight_matrix[i])
@@ -69,8 +75,9 @@ class neumpyv2:
     def addMatrix(self, matrix):
         self.weight_matrix.append(matrix)
 
-    def startResearch(self, amount):
-        
+    def startResearch(self, amount, objectname):
+        self.loadData()
+        self.objectname = objectname
         for i in range(amount):
             self.cycles += 1
             if self.traning_complete:
@@ -84,4 +91,35 @@ class neumpyv2:
         if result:
             print(f"found target it took {self.cycles} cycles to reach")
             self.traning_complete = True
-            
+            self.saveData()
+
+
+    def checkAnswerDB(self):
+        self.predictionStage()
+        match = self.collection.query(query_embeddings=self.prediction, n_results=1)
+        print(match["metadatas"][0][0])
+
+    def cleardata(self):
+        self.grad.clear()
+        self.hidden_error.clear()
+        self.input_memory.clear()
+
+    def saveData(self):
+        np.save(f"models/{self.name}", self.weight_matrix)
+        does_exist = self.collection.query(query_embeddings=self.target, n_results=1)
+        print()
+        closest_distance = does_exist["distances"][0][0]
+        
+        if closest_distance < 0.0004:
+            print("already exists")
+            print(does_exist["metadatas"][0][0])
+        else:
+            print("saved to db")
+            self.collection.add(ids=f"{self.objectname}",embeddings=self.target, metadatas={
+                "object_name": self.objectname 
+            }, )
+
+    def loadData(self):
+      self.weight_matrix = np.load(f"models/{self.name}.npy")
+
+    
