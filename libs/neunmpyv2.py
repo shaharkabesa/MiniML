@@ -4,7 +4,7 @@ import chromadb
 
 
 class neumpyv2:
-    def __init__(self, target, input, learning_rate, name):
+    def __init__(self, target, input, learning_rate, name, collectionname):
         self.weight_matrix = []
         self.target = target
         self.input = input
@@ -19,8 +19,10 @@ class neumpyv2:
         self.cycles = 0
         self.name = name
         self.objectname = ""
+        self.collectionname = collectionname
         self.vectordb = chromadb.PersistentClient("./vecordb")
-        self.collection = self.vectordb.get_or_create_collection(name="testcollection")
+        self.collection = self.vectordb.get_or_create_collection(name=f"{self.collectionname}")
+        self.isDebug = False
     def predictionStage(self):
         self.grad.clear()
         self.hidden_error.clear()
@@ -31,7 +33,8 @@ class neumpyv2:
             self.predict(self.input_memory[i],self.weight_matrix[i])
         final_prediction = self.input_memory[-1]
         self.prediction = final_prediction
-        print(f"Prediction : {final_prediction}\n")
+        if self.isDebug:
+            print(f"Prediction : {final_prediction}\n")
         
         self.errorStage()
 
@@ -44,9 +47,9 @@ class neumpyv2:
 
     def errorStage(self): 
         self.error = self.prediction - self.target
-        
-        
-        print(f"Error: {self.error} \n")
+        print(f"\nCurrent Error: {self.error}\n")
+        if self.isDebug:
+            print(f"Error: {self.error} \n")
         for i in range(len(self.weight_matrix) -1,-1,-1):
                 
             self.gradientCalculation(self.input_memory[i], self.weight_matrix[i], self.error)
@@ -68,15 +71,17 @@ class neumpyv2:
         for i in range(amount):
             new_matrix = np.random.uniform(-0.5, 0.5,(self.input_shape[1],self.input_shape[1]))
 
+        
             self.addMatrix(new_matrix)
-        print(f"Populated list of {amount} matrix succesfully\n")
-        print(f"The dimension of each matrix\n rows: {self.weight_matrix[1].shape[1]} columns: {self.weight_matrix[1].shape[1]}")
+        if self.isDebug:
+            print(f"Populated list of {amount} matrix succesfully\n")
+            print(f"The dimension of each matrix\n rows: {self.weight_matrix[1].shape[1]} columns: {self.weight_matrix[1].shape[1]}")
         
     def addMatrix(self, matrix):
         self.weight_matrix.append(matrix)
 
     def startResearch(self, amount, objectname):
-        self.loadData()
+        
         self.objectname = objectname
         for i in range(amount):
             self.cycles += 1
@@ -107,9 +112,9 @@ class neumpyv2:
     def saveData(self):
         np.save(f"models/{self.name}", self.weight_matrix)
         does_exist = self.collection.query(query_embeddings=self.target, n_results=1)
-        print()
+              
         closest_distance = does_exist["distances"][0][0]
-        
+        print(closest_distance)  
         if closest_distance < 0.0004:
             print("already exists")
             print(does_exist["metadatas"][0][0])
